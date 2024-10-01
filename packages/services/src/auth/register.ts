@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET! ;
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 const createUserSchema = z.object({
   name: z.string().min(1, "El nombre es requerido"),
@@ -32,7 +32,6 @@ export const register = async (info: createUserDto) => {
 
   await user.save();
 
-  // Generar el token JWT
   const token = jwt.sign(
     {
       id: user.id,

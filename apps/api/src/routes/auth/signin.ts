@@ -11,14 +11,12 @@ export const signinRoute: RouteOptions = {
         password: string;
       };
 
-      // Validar que los datos requeridos estén presentes
       if (!email || !password) {
         return reply
           .status(400)
           .send({ error: "Email y contraseña son requeridos" });
       }
 
-      // Llamar al servicio para iniciar sesión
       const result = await signin(email, password);
       reply.status(200).send(result);
     } catch (err) {

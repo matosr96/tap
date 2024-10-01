@@ -9,26 +9,23 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 
 export const signin = async (email: string, password: string) => {
   try {
-    // Buscar al usuario por su email
     const user = await UserSchema.findOneBy({ email });
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
 
-    // Verificar si la contraseña es correcta
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new Error("Contraseña incorrecta");
     }
 
-    // Generar el token JWT
     const token = jwt.sign(
       {
         id: user.id,
         email: user.email,
       },
       JWT_SECRET,
-      { expiresIn: "1h" } // El token expira en 1 hora
+      { expiresIn: "1h" } 
     );
 
     return { user, token };

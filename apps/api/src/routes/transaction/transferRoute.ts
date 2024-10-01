@@ -17,14 +17,12 @@ export const transferRoute: RouteOptions = {
         amount: number;
       };
 
-      // Validar que los datos requeridos estén presentes
       if (!recipientEmail || !amount) {
         return reply
           .status(400)
           .send({ error: "Email del destinatario y monto son requeridos" });
       }
 
-      // Llamar al servicio para realizar la transferencia
       const result = await transferMoney(token, recipientEmail, amount);
       reply.status(200).send(result);
     } catch (err) {

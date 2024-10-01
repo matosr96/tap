@@ -82,6 +82,9 @@ importers:
       '@tap/entities':
         specifier: workspace:*
         version: link:../entities
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       typeorm:
         specifier: ^0.3.20
         version: 0.3.20(pg@8.13.0)

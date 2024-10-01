@@ -13,10 +13,8 @@ export const getBalanceRoute: RouteOptions = {
 
       const token = authHeader.split(" ")[1];
 
-      // Llamar al servicio para obtener el balance
       const balance = await getBalance(token);
 
-      // Devolver el balance al usuario
       reply.status(200).send(balance);
     } catch (err) {
       if (err instanceof Error) {

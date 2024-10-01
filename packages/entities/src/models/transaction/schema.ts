@@ -2,20 +2,20 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("transactions")
 export class TransactionSchema extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid") // Usar UUID si deseas un identificador único más robusto
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
-  senderId: string; // Id del remitente
+  senderId: string;
 
   @Column()
-  recipientId: string; // Id del destinatario
+  recipientId: string;
 
-  @Column("decimal", { precision: 10, scale: 2 }) // Usar decimal para representar montos de dinero
+  @Column("decimal", { precision: 10, scale: 2 })
   amount: number;
 
   @Column()
-  type: string; // Tipo de transacción, e.g. "transfer"
+  type: string;
 
   @Column({ default: () => "now()" })
   createdAt: Date;

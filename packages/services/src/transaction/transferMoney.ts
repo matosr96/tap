@@ -24,28 +24,23 @@ export const transferMoney = async (
       throw new Error("Usuario destinatario no encontrado");
     }
 
-    // Validar que el remitente tenga saldo suficiente
     if (sender.balance < amount) {
       throw new Error("Saldo insuficiente");
     }
 
-    // Realizar la transferencia: Descontar saldo al remitente y agregar saldo al destinatario
     sender.balance -= amount;
     recipient.balance += amount;
 
-    // Guardar los cambios en la base de datos
     await sender.save();
     await recipient.save();
 
-    // Registrar la transacción en la base de datos
     const transaction = new TransactionSchema();
-    transaction.senderId = sender.id; // Asignar senderId correctamente
-    transaction.recipientId = recipient.id; // Asignar recipientId correctamente
+    transaction.senderId = sender.id;
+    transaction.recipientId = recipient.id;
     transaction.amount = amount;
-    transaction.type = "transfer"; // Tipo de transacción
+    transaction.type = "transfer";
     transaction.createdAt = new Date();
 
-    // Guardar la transacción en la base de datos
     await transaction.save();
 
     return { message: "Transferencia realizada con éxito", transaction };
